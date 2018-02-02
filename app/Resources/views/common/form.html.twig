@@ -1,0 +1,31 @@
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-8 col-xs-offset-2">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>{{ action }} {{ entityName }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+
+                    </div>
+                    <div class="panel-footer panel-info">
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </button>
+                        {{ form_end(form) }}
+                        <a href="{{ path(back) }}" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

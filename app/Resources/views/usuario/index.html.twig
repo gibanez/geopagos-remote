@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="height: 50px;">
+                        <strong>Usuarios</strong>
+                        <a href="{{ path('usuario_new') }}" class="btn btn-success pull-right">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Edad</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for usuario in usuarios %}
+                                <tr>
+                                    <td><a href="{{ path('usuario_show', { 'codigoUsuario': usuario.codigoUsuario }) }}">{{ usuario.codigoUsuario }}</a></td>
+                                    <td>{{ usuario.usuario }}</td>
+                                    <td>{{ usuario.edad }}</td>
+
+                                    <td class="text-right">
+                                        <a class="btn btn-primary btn-sm" href="{{ path('usuario_pago', { 'codigoUsuario': usuario.codigoUsuario }) }}" data-toggle="tooltip" data-placement="top" title="Mostrar listado de pagos del usuario: {{ usuario }}">
+                                            Pagos <span class="badge">{{ usuario.pagos|length }}</span>
+                                        </a>
+                                        <a class="btn btn-primary btn-sm" href="{{ path('usuario_favoritos', { 'codigoUsuario': usuario.codigoUsuario }) }}" data-toggle="tooltip" data-placement="top" title="Mostrar listado de favoritos del usuario: {{ usuario }}">
+                                            Favoritos <span class="badge">{{ usuario.favoritos|length }}</span>
+                                        </a>
+                                        <a href="{{ path('usuario_show', { 'codigoUsuario': usuario.codigoUsuario }) }}" class="btn btn-default"  data-toggle="tooltip" data-placement="top" title="Ver detalle de usuario">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </a>
+
+                                        <a href="{{ path('usuario_edit', { 'codigoUsuario': usuario.codigoUsuario }) }}" class="btn btn-info"  data-toggle="tooltip" data-placement="top" title="Editar  usuario">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

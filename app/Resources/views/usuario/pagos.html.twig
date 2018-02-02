@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Usuario/Pagos
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-xs-4">
+                                <dl class="dl-horizontal">
+                                    <dt>Id</dt>
+                                    <dd>{{ usuario.codigoUsuario }}</dd>
+                                    <dt>Nombre</dt>
+                                    <dd>{{ usuario.usuario }}</dd>
+                                    <dt>Edad</dt>
+                                    <dd>{{ usuario.edad }}</dd>
+
+                                </dl>
+                            </div>
+
+                            <div class="col-xs-12 col-xs-8">
+                                <div class="list-group">
+                                    {% for pago in usuario.pagos %}
+                                        <a href="{{ path('pago_show', { 'codigoPago': pago.codigoPago }) }}" class="list-group-item">{{ pago }}</a>
+                                    {%  endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="panel-footer panel-info text-right">
+                        <a href="{{ path('usuario_index') }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Regresar al listado de usaurios">
+                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

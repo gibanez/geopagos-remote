@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Pago</h3>
+                    </div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal">
+
+                            <dt>Codigopago</dt>
+                            <dd> {{ pago.codigoPago }}</dd>
+                            <dt>Importe</dt>
+                            <dd class="text-right"><strong>$ {{ pago.importe }}</strong></dd>
+                            <dt>Fecha</dt>
+                            <dd>{{ pago.fecha|date('Y-m-d') }}</dd>
+
+                        </dl>
+                    </div>
+                    <div class="panel-footer panel-info text-right">
+
+
+                        <a href="{{ path('pago_index') }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Regresar al listado de pago">
+                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                        </a>
+
+                        <a href="{{ path('pago_edit', { 'codigoPago': pago.codigoPago }) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Editar pago" >
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+
+                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Ver usuarios" id="link-users">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+
+                        <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar pago" id="link-delete">
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Eliminar</h4>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro que desea eliminar el pago?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-success" id="btn-accept-delete">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-users" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Usuarios</h4>
+                </div>
+                <div class="modal-body">
+                    <dl class="dl-horizontal">
+                        {% for user in pago.usuarios %}
+                            <dt>Nombre</dt>
+                            <dd>{{ user }}</dd>
+                            <dt>edad</dt>
+                            <dd style="margin-bottom: 10px;">{{ user.edad }} años</dd>
+                        {%  endfor %}
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-success" id="btn-accept-delete">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" class="hidden">
+            {{ form_end(delete_form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        $(function () {
+            $("#link-delete").click(function () {
+                $("#modal-delete").modal("show");
+            });
+
+            $("#link-users").click(function () {
+                $("#modal-users").modal("show");
+            });
+
+            $('#btn-accept-delete').click(function () {
+                $('form').submit()
+            })
+
+        })
+    </script>
+
+{% endblock %}

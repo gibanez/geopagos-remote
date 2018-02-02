@@ -1,0 +1,5 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'common/form.html.twig' with {action:"Agregar favorito", entityName:"Usuario", back:"usuario_index"} %}
+{% endblock %}

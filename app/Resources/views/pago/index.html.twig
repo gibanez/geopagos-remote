@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="height: 50px;">
+                        <strong>Pagos</strong>
+                        <a href="{{ path('pago_new') }}" class="btn btn-success pull-right">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Importe</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for pago in pagos %}
+                                <tr>
+                                    <td><a href="{{ path('pago_show', { 'codigoPago': pago.codigoPago }) }}">{{ pago.codigoPago }}</a></td>
+                                    <td>{{ pago.importe }}</td>
+                                    <td>{% if pago.fecha %}{{ pago.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td class="text-right">
+
+                                        <a href="{{ path('pago_show', { 'codigoPago': pago.codigoPago }) }}" class="btn btn-default"  data-toggle="tooltip" data-placement="top" title="Ver detalle de pago">
+                                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                        </a>
+
+                                        <a href="{{ path('pago_edit', { 'codigoPago': pago.codigoPago }) }}" class="btn btn-info"  data-toggle="tooltip" data-placement="top" title="Editar pago">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="panel-footer panel-info">
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

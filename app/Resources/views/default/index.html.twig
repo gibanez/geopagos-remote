@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+
+            {% for card in cards %}
+                <div class="col s12 m6">
+                    <div class="card {{ md_theme }} darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{ card.title }}</span>
+                            <p>{{ card.description }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ path( card.path ) }}">Ver listado</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+    </div>
+
+{% endblock %}

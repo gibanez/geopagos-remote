@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col s12 m12">
+        <ul class="collection">
+            <li class="collection-item avatar">
+                <i class="material-icons circle">folder</i>
+                <span class="title">Title</span>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            </li>
+        </ul>
+        </div>
+    </div>
+
+
+    <h1>Usuarios list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Codigousuario</th>
+                <th>Usuario</th>
+                <th>Clave</th>
+                <th>Edad</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td><a href="{{ path('usuario_show', { 'codigoUsuario': usuario.codigoUsuario }) }}">{{ usuario.codigoUsuario }}</a></td>
+                <td>{{ usuario.usuario }}</td>
+                <td>{{ usuario.clave }}</td>
+                <td>{{ usuario.edad }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('usuario_show', { 'codigoUsuario': usuario.codigoUsuario }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('usuario_edit', { 'codigoUsuario': usuario.codigoUsuario }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('usuario_new') }}">Create a new usuario</a>
+        </li>
+    </ul>
+{% endblock %}

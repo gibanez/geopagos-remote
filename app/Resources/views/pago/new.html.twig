@@ -1,0 +1,5 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'common/form.html.twig' with {action:"Crear", entityName:"Pago", back:"pago_index"} %}
+{% endblock %}
